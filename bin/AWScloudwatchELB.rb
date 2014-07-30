@@ -42,14 +42,17 @@ end
 
 optparse.parse!
 
-if ARGV.length == 0
-  puts "Must specifiy at least one load balancer name to pull metrics for"
-  exit 1
-end
 
 lbs = []
 ARGV.each do |lb|
   lbs << lb
+end
+
+if lbs.length == 0
+  elbs = Fog::AWS::ELB.new(:aws_secret_access_key => $awssecretkey, :aws_access_key_id => $awsaccesskey, :region => $awsregion)
+  for elb in elbs.describe_load_balancers().body['DescribeLoadBalancersResult']['LoadBalancerDescriptions']
+    lbs << elb['LoadBalancerName']
+  end
 end
 
 startTime = Time.now.utc - options[:start_offset].to_i
