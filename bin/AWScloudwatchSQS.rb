@@ -68,7 +68,6 @@ unit = 'Count'
 
 cloudwatch = Fog::AWS::CloudWatch.new(:aws_secret_access_key => $awssecretkey, :aws_access_key_id => $awsaccesskey, :region => $awsregion)
 
-queues = ['event-tracker-inbox']
 queues.each do |table|
   metricNames.each do |metricName, statistic|
     responses = cloudwatch.get_metric_statistics({
