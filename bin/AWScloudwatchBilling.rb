@@ -11,7 +11,7 @@ require 'json'
 require 'optparse'
 
 options = {
-    :start_offset => 21660,
+    :start_offset => 14400,
     :end_offset => 60
 }
 
