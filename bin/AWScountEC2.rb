@@ -23,10 +23,12 @@ tag_report			= Hash.new
 
 # Flavor counts
 instance_list.each do |i|
-  if instance_report[i.flavor_id].nil?
-    instance_report[i.flavor_id] = 1
-  else
-    instance_report[i.flavor_id] = instance_report[i.flavor_id] + 1
+  if i.ready?
+    if instance_report[i.flavor_id].nil?
+      instance_report[i.flavor_id] = 1
+    else
+      instance_report[i.flavor_id] = instance_report[i.flavor_id] + 1
+    end
   end
 end
 
